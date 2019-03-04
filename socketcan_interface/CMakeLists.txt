@@ -93,6 +93,17 @@ install(
 )
 if(CATKIN_ENABLE_TESTING)
 
+  # socketcan_benchmark
+  add_executable(socketcan_benchmark
+    test/benchmark.cpp
+  )
+
+  target_link_libraries(socketcan_benchmark
+     ${catkin_LIBRARIES}
+     ${Boost_LIBRARIES}
+     ${CMAKE_THREAD_LIBS_INIT}
+  )
+
   catkin_add_gtest(${PROJECT_NAME}-test_dummy_interface
     test/test_dummy_interface.cpp
   )
