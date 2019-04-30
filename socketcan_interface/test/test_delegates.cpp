@@ -38,7 +38,7 @@ TEST(DelegatesTest, testFrameDelegate)
     boost::shared_ptr<Receiver> r6(new Receiver());
     std::shared_ptr<Receiver> r7(new Receiver());
 
-    can::FrameListenerConstSharedPtr l1 = dummy.createMsgListener(can::CommInterface::FrameDelegate(r1, &Receiver::handle));
+    can::FrameListenerConstSharedPtr l1 = dummy.createMsgListener(can::CommInterface::FrameDelegate(&r1, &Receiver::handle));
     can::FrameListenerConstSharedPtr l2 = dummy.createMsgListener(can::CommInterface::FrameDelegate(fill_r2));
     can::FrameListenerConstSharedPtr l3 = dummy.createMsgListener(can::CommInterface::FrameDelegate(std::bind(fill_any, std::ref(r3), std::placeholders::_1)));
     can::FrameListenerConstSharedPtr l4 = dummy.createMsgListener(std::bind(fill_any, std::ref(r4), std::placeholders::_1));
@@ -85,7 +85,7 @@ TEST(DelegatesTest, testBoolFunc)
     BoolTest b2(true);
 
     BoolDelegate d3(&b1, &BoolTest::test_bool);
-    BoolDelegate d4(b2, &BoolTest::test_bool);
+    BoolDelegate d4(&b2, &BoolTest::test_bool);
     EXPECT_FALSE(d3());
     EXPECT_TRUE(d4());
 

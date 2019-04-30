@@ -10,7 +10,7 @@ template <typename T> class DelegateHelper : public T {
 public:
   template <typename Object, typename Instance, typename ...Args>
   DelegateHelper(Object &&o, typename T::result_type (Instance::*member)(Args... args)) :
-      T([&o, fn=std::mem_fn(member)](Args... args) -> typename T::result_type { return fn(o, args...); })
+      T([o, member](Args... args) -> typename T::result_type { return ((*o).*member)(args...); })
   {
   }
   template <typename Callable>
