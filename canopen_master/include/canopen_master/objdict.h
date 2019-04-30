@@ -280,7 +280,7 @@ public:
     using ReadFunc = std::function<void(const ObjectDict::Entry&, String &)>;
     using ReadDelegate = can::DelegateHelper<ReadFunc>;
 
-    using WriteFunc = std::function<void(const ObjectDict::Entry&, String &)>;
+    using WriteFunc = std::function<void(const ObjectDict::Entry&, const String &)>;
     using WriteDelegate = can::DelegateHelper<WriteFunc>;
 
     typedef std::shared_ptr<ObjectStorage> ObjectStorageSharedPtr;
